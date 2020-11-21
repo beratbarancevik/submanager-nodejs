@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "env NODE_ENV=dev nodemon start",
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",

@@ -13,7 +13,7 @@ const getSubscriptions = async (req, res) => {
     const userId = req.user.uid;
     try {
         const connection = await mysql.connection();
-        const goals = await database.getGoals(connection, userId);
+        const goals = await database.getSubscriptions(connection, userId);
         connection.release();
         res.send(result.generateResultData(goals));
         return;

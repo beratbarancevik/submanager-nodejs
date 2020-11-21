@@ -2,10 +2,10 @@
 'use strict';
 
 const https = require('https');
-const keys = require('../keys/keys');
+const slackUrls = require('../../connection/keys/slack_urls');
 const { english: english } = require('./constants');
 
-const engineeringWebHookURL = keys.SLACK_API_ERROR_CHANNEL_URL;
+const engineeringWebHookURL = slackUrls.SLACK_API_ERROR_CHANNEL_URL;
 
 const httpStatusCode = {
     '400': 'Bad Request'

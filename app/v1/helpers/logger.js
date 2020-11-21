@@ -1,7 +1,7 @@
 /*jslint node: true */
 'use strict';
 
-const slack = require('../../connection/keys/slack_urls');
+const slack = require('./slack');
 
 const logError = (req, err) => {
     console.error(err);

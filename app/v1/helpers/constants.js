@@ -10,12 +10,12 @@ const error = {
 };
 
 const success = {
-    GOAL_CREATED: 'GOAL_CREATED'
+    SUBSCRIPTION_CREATED: 'SUBSCRIPTION_CREATED'
 };
 
 const english = {
     EMPTY_TITLE: 'Please enter a title.',
-    GOAL_CREATED: 'Goal created!',
+    SUBSCRIPTION_CREATED: 'Subscription created!',
     USER_NOT_FOUND: 'This user does not exist.'
 };
 

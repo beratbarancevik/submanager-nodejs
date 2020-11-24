@@ -49,7 +49,24 @@ const createSubscription = async (req, res) => {
     }
 };
 
+const deleteSubscription = async (req, res) => {
+    try {
+        const userId = req.user.uid;
+        const subscriptionId = req.params.id;
+        const connection = await mysql.connection();
+        await database.deleteSubscription(connection, subscriptionId, userId);
+        connection.release();
+        res.send(result.generateResultData(req.body));
+        return;
+    } catch (err) {
+        logger.logError(req, err);
+        res.status(err.statusCode || 500).send(result.generateErrorData(err));
+        return;
+    }
+};
+
 module.exports = {
     getSubscriptions,
-    createSubscription
+    createSubscription,
+    deleteSubscription
 };

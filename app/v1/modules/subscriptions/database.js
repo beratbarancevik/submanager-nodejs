@@ -30,7 +30,22 @@ const createSubscription = (connection, subscription) => {
     });
 };
 
+const deleteSubscription = (connection, subscriptionId, userId) => {
+    return new Promise((resolve, reject) => {
+        const query = `DELETE FROM subscription WHERE id = '${subscriptionId}' AND userId = '${userId}'`;
+        connection.query(query, (err, results, fields) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+};
+
 module.exports = {
     getSubscriptions,
-    createSubscription
+    createSubscription,
+    deleteSubscription
 };

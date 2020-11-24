@@ -10,6 +10,7 @@ const router = express.Router();
 const subscriptions = require('./modules/subscriptions/subscriptions');
 router.get('/subscriptions', subscriptions.getSubscriptions);
 router.post('/subscriptions', subscriptions.createSubscription);
+router.delete('/subscriptions/:id', subscriptions.deleteSubscription);
 
 /*
  ** ERROR

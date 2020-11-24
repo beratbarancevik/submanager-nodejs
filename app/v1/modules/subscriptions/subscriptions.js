@@ -49,6 +49,30 @@ const createSubscription = async (req, res) => {
     }
 };
 
+const updateSubscription = async (req, res) => {
+    try {
+        const userId = req.user.uid;
+        const subscriptionId = req.params.id;
+        const title = req.body.title;
+        const description = req.body.description || '';
+        const price = req.body.price || '0.0';
+        const startedAt = req.body.startedAt;
+        const subscription = new Subscription(subscriptionId, userId, title, description, price, startedAt);
+        if (!title) {
+            throw new CustomError(constants.error.EMPTY_TITLE, 400);
+        }
+        const connection = await mysql.connection();
+        await database.updateSubscription(connection, subscription);
+        connection.release();
+        res.send(result.generateResultData(req.body, constants.success.SUBSCRIPTION_UPDATED));
+        return;
+    } catch (err) {
+        logger.logError(req, err);
+        res.status(err.statusCode || 500).send(result.generateErrorData(err));
+        return;
+    }
+};
+
 const deleteSubscription = async (req, res) => {
     try {
         const userId = req.user.uid;
@@ -56,7 +80,7 @@ const deleteSubscription = async (req, res) => {
         const connection = await mysql.connection();
         await database.deleteSubscription(connection, subscriptionId, userId);
         connection.release();
-        res.send(result.generateResultData(req.body));
+        res.send(result.generateResultData(req.body, constants.success.SUBSCRIPTION_DELETED));
         return;
     } catch (err) {
         logger.logError(req, err);
@@ -68,5 +92,6 @@ const deleteSubscription = async (req, res) => {
 module.exports = {
     getSubscriptions,
     createSubscription,
+    updateSubscription,
     deleteSubscription
 };

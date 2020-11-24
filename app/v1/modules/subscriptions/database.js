@@ -30,6 +30,22 @@ const createSubscription = (connection, subscription) => {
     });
 };
 
+const updateSubscription = (connection, subscription) => {
+    return new Promise((resolve, reject) => {
+        const query = `UPDATE subscription 
+                        SET title = '${subscription.title}', description = '${subscription.description}', price = '${subscription.price}', startedAt = '${subscription.startedAt}' 
+                        WHERE id = '${subscription.id}' AND userId = '${subscription.userId}'`;
+        connection.query(query, (err, results, fields) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+};
+
 const deleteSubscription = (connection, subscriptionId, userId) => {
     return new Promise((resolve, reject) => {
         const query = `DELETE FROM subscription WHERE id = '${subscriptionId}' AND userId = '${userId}'`;
@@ -47,5 +63,6 @@ const deleteSubscription = (connection, subscriptionId, userId) => {
 module.exports = {
     getSubscriptions,
     createSubscription,
+    updateSubscription,
     deleteSubscription
 };

@@ -44,6 +44,21 @@ const createSubscription = (connection, subscription) => {
     });
 };
 
+const createSubscriptionSuggestion = (connection, id, title, imageUrl) => {
+    return new Promise((resolve, reject) => {
+        const query = `INSERT INTO subscription_suggestion (id, title, imageUrl) 
+                        VALUES ('${id}', '${title}', '${imageUrl}')`;
+        connection.query(query, (err, results, fields) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+};
+
 const updateSubscription = (connection, subscription) => {
     return new Promise((resolve, reject) => {
         const query = `UPDATE subscription 
@@ -78,6 +93,7 @@ module.exports = {
     getSubscriptions,
     getSubscriptionsList,
     createSubscription,
+    createSubscriptionSuggestion,
     updateSubscription,
     deleteSubscription
 };

@@ -63,6 +63,23 @@ const createSubscription = async (req, res) => {
     }
 };
 
+const createSubscriptionSuggestion = async (req, res) => {
+    try {
+        const title = req.body.title;
+        const imageUrl = req.body.imageUrl;
+        const id = uuidv4();
+        const connection = await mysql.connection();
+        await database.createSubscriptionSuggestion(connection, id, title, imageUrl);
+        connection.release();
+        res.send(result.generateResultData(req.body));
+        return;
+    } catch (err) {
+        logger.logError(req, err);
+        res.status(err.statusCode || 500).send(result.generateErrorData(err));
+        return;
+    }
+};
+
 const updateSubscription = async (req, res) => {
     try {
         const userId = req.user.uid;
@@ -107,6 +124,7 @@ module.exports = {
     getSubscriptions,
     getSubscriptionsList,
     createSubscription,
+    createSubscriptionSuggestion,
     updateSubscription,
     deleteSubscription
 };

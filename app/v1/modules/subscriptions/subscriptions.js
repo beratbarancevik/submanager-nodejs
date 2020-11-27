@@ -25,6 +25,20 @@ const getSubscriptions = async (req, res) => {
     }
 };
 
+const getSubscriptionsList = async (req, res) => {
+    try {
+        const connection = await mysql.connection();
+        const subscription = await database.getSubscriptionsList(connection);
+        connection.release();
+        res.send(result.generateResultData(subscription));
+        return;
+    } catch (err) {
+        logger.logError(req, err);
+        res.status(500).send(result.generateErrorData(err));
+        return;
+    }
+};
+
 const createSubscription = async (req, res) => {
     try {
         const userId = req.user.uid;
@@ -91,6 +105,7 @@ const deleteSubscription = async (req, res) => {
 
 module.exports = {
     getSubscriptions,
+    getSubscriptionsList,
     createSubscription,
     updateSubscription,
     deleteSubscription

@@ -15,6 +15,20 @@ const getSubscriptions = (connection, userId) => {
     });
 };
 
+const getSubscriptionsList = (connection, userId) => {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM subscription_suggestion`;
+        connection.query(query, (err, results, fields) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+};
+
 const createSubscription = (connection, subscription) => {
     return new Promise((resolve, reject) => {
         const query = `INSERT INTO subscription (id, userId, title, description, price, startedAt) 
@@ -62,6 +76,7 @@ const deleteSubscription = (connection, subscriptionId, userId) => {
 
 module.exports = {
     getSubscriptions,
+    getSubscriptionsList,
     createSubscription,
     updateSubscription,
     deleteSubscription

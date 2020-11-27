@@ -42,12 +42,13 @@ const getSubscriptionsList = async (req, res) => {
 const createSubscription = async (req, res) => {
     try {
         const userId = req.user.uid;
+        const typeId = req.body.typeId;
         const title = req.body.title;
         const description = req.body.description || '';
         const price = req.body.price || '0.0';
         const startedAt = req.body.startedAt;
         const subscriptionId = uuidv4();
-        const subscription = new Subscription(subscriptionId, userId, title, description, price, startedAt);
+        const subscription = new Subscription(subscriptionId, typeId, userId, title, description, price, startedAt);
         if (!title) {
             throw new CustomError(constants.error.EMPTY_TITLE, 400);
         }

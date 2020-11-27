@@ -2,8 +2,9 @@
 'use strict';
 
 class Subscription {
-    constructor(id, userId, title, description, price, startedAt, createdAt, updatedAt) {
+    constructor(id, typeId, userId, title, description, price, startedAt, createdAt, updatedAt) {
         this.id = id;
+        this.typeId = typeId;
         this.userId = userId;
         this.title = title;
         this.description = description;

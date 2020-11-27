@@ -31,8 +31,8 @@ const getSubscriptionsList = (connection, userId) => {
 
 const createSubscription = (connection, subscription) => {
     return new Promise((resolve, reject) => {
-        const query = `INSERT INTO subscription (id, userId, title, description, price, startedAt) 
-                        VALUES ('${subscription.id}', '${subscription.userId}', '${subscription.title}', '${subscription.description}', '${subscription.price}', '${subscription.startedAt}')`;
+        const query = `INSERT INTO subscription (id, typeId, userId, title, description, price, startedAt) 
+                        VALUES ('${subscription.id}', '${subscription.typeId}', '${subscription.userId}', '${subscription.title}', '${subscription.description}', '${subscription.price}', '${subscription.startedAt}')`;
         connection.query(query, (err, results, fields) => {
             if (err) {
                 console.error(err);

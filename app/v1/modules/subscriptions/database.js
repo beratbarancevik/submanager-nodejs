@@ -3,7 +3,8 @@
 
 const getSubscriptions = (connection, userId) => {
     return new Promise((resolve, reject) => {
-        const query = `SELECT * FROM subscription WHERE userId = '${userId}'`;
+        const query = `SELECT s.id, s.title, s.description, s.price, s.startedAt, ss.imageUrl FROM subscription AS s
+                        INNER JOIN subscription_suggestion AS ss ON s.typeId = ss.id WHERE userId = '${userId}'`;
         connection.query(query, (err, results, fields) => {
             if (err) {
                 console.error(err);

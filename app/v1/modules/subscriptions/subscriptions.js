@@ -89,7 +89,7 @@ const updateSubscription = async (req, res) => {
         const description = req.body.description || '';
         const price = req.body.price || '0.0';
         const startedAt = req.body.startedAt;
-        const subscription = new Subscription(subscriptionId, userId, title, description, price, startedAt);
+        const subscription = new Subscription(subscriptionId, '', userId, title, description, price, startedAt);
         if (!title) {
             throw new CustomError(constants.error.EMPTY_TITLE, 400);
         }

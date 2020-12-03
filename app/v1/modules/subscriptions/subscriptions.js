@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const result = require('../../helpers/result');
 const logger = require('../../helpers/logger');
 const constants = require('../../helpers/constants');
+const date = require('../../helpers/date');
 const mysql = require('../../../connection/mysql');
 const database = require('./database');
 const CustomError = require('../../models/CustomError');
@@ -46,9 +47,10 @@ const createSubscription = async (req, res) => {
         const title = req.body.title;
         const description = req.body.description || '';
         const price = req.body.price || '0.0';
-        const startDate = req.body.startDate;
+        const startedAt = req.body.startedAt;
+        const startedAtFormatted = date.formatDate(startedAt);
         const subscriptionId = uuidv4();
-        const subscription = new Subscription(subscriptionId, typeId, userId, title, description, price, startDate);
+        const subscription = new Subscription(subscriptionId, typeId, userId, title, description, price, startedAtFormatted);
         if (!title) {
             throw new CustomError(constants.error.EMPTY_TITLE, 400);
         }
@@ -88,8 +90,9 @@ const updateSubscription = async (req, res) => {
         const title = req.body.title;
         const description = req.body.description || '';
         const price = req.body.price || '0.0';
-        const startDate = req.body.startDate;
-        const subscription = new Subscription(subscriptionId, '', userId, title, description, price, startDate);
+        const startedAt = req.body.startedAt;
+        const startedAtFormatted = date.formatDate(startedAt);
+        const subscription = new Subscription(subscriptionId, '', userId, title, description, price, startedAtFormatted);
         if (!title) {
             throw new CustomError(constants.error.EMPTY_TITLE, 400);
         }

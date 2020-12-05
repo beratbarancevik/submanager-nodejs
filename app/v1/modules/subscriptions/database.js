@@ -45,10 +45,10 @@ const createSubscription = (connection, subscription) => {
     });
 };
 
-const createSubscriptionSuggestion = (connection, id, title, imageUrl) => {
+const createSubscriptionSuggestion = (connection, id, typeId, title, imageUrl) => {
     return new Promise((resolve, reject) => {
-        const query = `INSERT INTO subscription_suggestion (id, title, imageUrl) 
-                        VALUES ('${id}', '${title}', '${imageUrl}')`;
+        const query = `INSERT INTO subscription_suggestion (id, typeId, title, imageUrl) 
+                        VALUES ('${id}', '${typeId}', '${title}', '${imageUrl}')`;
         connection.query(query, (err, results, fields) => {
             if (err) {
                 console.error(err);

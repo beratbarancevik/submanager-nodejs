@@ -70,9 +70,10 @@ const createSubscriptionSuggestion = async (req, res) => {
     try {
         const title = req.body.title;
         const imageUrl = req.body.imageUrl;
+        const typeId = req.body.typeId || '0';
         const id = uuidv4();
         const connection = await mysql.connection();
-        await database.createSubscriptionSuggestion(connection, id, title, imageUrl);
+        await database.createSubscriptionSuggestion(connection, id, typeId, title, imageUrl);
         connection.release();
         res.send(result.generateResultData(req.body));
         return;

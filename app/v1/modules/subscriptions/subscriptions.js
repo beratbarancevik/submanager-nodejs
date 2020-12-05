@@ -43,7 +43,7 @@ const getSubscriptionsList = async (req, res) => {
 const createSubscription = async (req, res) => {
     try {
         const userId = req.user.uid;
-        const typeId = req.body.typeId;
+        const typeId = req.body.typeId || '0';
         const title = req.body.title;
         const description = req.body.description || '';
         const price = req.body.price || '0.0';
@@ -70,10 +70,9 @@ const createSubscriptionSuggestion = async (req, res) => {
     try {
         const title = req.body.title;
         const imageUrl = req.body.imageUrl;
-        const typeId = req.body.typeId || '0';
         const id = uuidv4();
         const connection = await mysql.connection();
-        await database.createSubscriptionSuggestion(connection, id, typeId, title, imageUrl);
+        await database.createSubscriptionSuggestion(connection, id, title, imageUrl);
         connection.release();
         res.send(result.generateResultData(req.body));
         return;

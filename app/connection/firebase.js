@@ -8,7 +8,7 @@ const admin = require('firebase-admin');
 // } else {
 //     key = require('./keys/firebase-key-prod.json');
 // }
-let key = require('./keys/firebase-key-prod.json');
+let key = require('./keys/firebase-key-dev.json');
 const keys = require('./keys/connection_keys.js');
 
 admin.initializeApp({

@@ -93,6 +93,7 @@ dist
 
 # Serverless directories
 .serverless/
+serverless.yml
 
 # FuseBox cache
 .fusebox/
@@ -102,3 +103,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Mac OS
+.DS_Store
+
+# Confidential Keys
+keys/
